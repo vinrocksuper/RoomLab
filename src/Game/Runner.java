@@ -2,33 +2,49 @@ package Game;
 
 import People.Person;
 import Rooms.Room;
+import Rooms.TrapRoom;
 import Rooms.WinningRoom;
 
 import java.util.Scanner;
+
+import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 
 public class Runner {
 	
 
 	private static boolean gameOn = true;
 	
-	public static void main(String[] args)
-	{
+	public static void main(String[] args) {
 		Room[][] building = new Room[5][5];
-		
+
 		//Fill the building with normal rooms
-		for (int x = 0; x<building.length; x++)
-		{
-			for (int y = 0; y < building[x].length; y++)
-			{
-				building[x][y] = new Room(x,y);
+		for (int x = 0; x < building.length; x++) {
+			for (int y = 0; y < building[x].length; y++) {
+				building[x][y] = new Room(x, y);
 			}
 		}
-		
+
 		//Create a random winning room.
-		int x = (int)(Math.random()*building.length);
-		int y = (int)(Math.random()*building.length);
+		int x = 0;
+		int y = 0;
+		while (x == 0 && y == 0) {
+			x = (int) (Math.random() * building.length);
+			y = (int) (Math.random() * building.length);
+		}
 		building[x][y] = new WinningRoom(x, y);
-		 
+		int a = 0;
+		int b = 0;
+		while (a == 0 && b == 0)
+		{
+			a =(int) (Math.random() * building.length);
+			b =(int) (Math.random() * building.length);
+			if(a == x && b ==x)
+			{
+				a=0;
+				b=0;
+			}
+		}
+		building[a][b] = new TrapRoom(a, b);
 		 //Setup player 1 and the input scanner
 		Person player1 = new Person("FirstName", "FamilyName", 0,0);
 		building[0][0].enterRoom(player1);

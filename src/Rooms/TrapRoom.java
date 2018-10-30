@@ -6,6 +6,7 @@ import People.Person;
 import java.util.Scanner;
 
 public class TrapRoom extends Room {
+    boolean cleared = false;
     public TrapRoom(int x,int y)
     {
         super(x,y);
@@ -14,50 +15,49 @@ public class TrapRoom extends Room {
     @Override
     public void enterRoom(Person x) {
         occupant = x;
-        x.setxLoc(xLoc);
-        x.setyLoc(yLoc);
-        int randomTrap = (int) ((Math.random())*4);
-        System.out.println("You've entered a trap room! The doors slam shut behind you. The words on the walls read:");
-        System.out.println(riddle(randomTrap));
-        Scanner answer = new Scanner(System.in);
-        String reply = answer.nextLine();
-        if(randomTrap == 0 )
-        {
-            if(reply.equalsIgnoreCase("fire"))
-            {
-                getDeath(randomTrap);
-                Runner.gameOff();
+
+        while(occupant.alive && cleared ==false) {
+            x.setxLoc(xLoc);
+            x.setyLoc(yLoc);
+            int randomTrap = (int) ((Math.random()) * 4);
+            System.out.println("You've entered a trap room! The doors slam shut behind you. The words on the walls read:");
+            System.out.println(riddle(randomTrap));
+            Scanner answer = new Scanner(System.in);
+            String reply = answer.nextLine();
+            if (randomTrap == 0) {
+                if (!reply.equalsIgnoreCase("fire")) {
+                    System.out.println(getDeath(randomTrap));
+                    Runner.gameOff();
+                }
+                cleared  = true;
+                answer.close();
+
             }
-
-        }
-        if(randomTrap == 1 )
-        {
-            if(reply.equalsIgnoreCase("blue wire"))
-            {
-                getDeath(randomTrap);
-                Runner.gameOff();
+            if (randomTrap == 1) {
+                if (!reply.equalsIgnoreCase("blue wire")) {
+                    System.out.println(getDeath(randomTrap));
+                    Runner.gameOff();
+                }
+                cleared  = true;
+                answer.close();
             }
-
-        }
-        if(randomTrap == 2 )
-        {
-            if(reply.equalsIgnoreCase("e"))
-            {
-                getDeath(randomTrap);
-                Runner.gameOff();
+            if (randomTrap == 2) {
+                if (!reply.equalsIgnoreCase("e")) {
+                    System.out.println(getDeath(randomTrap));
+                    Runner.gameOff();
+                }
+                cleared  = true;
+                answer.close();
             }
-
-        }
-        if(randomTrap == 3 )
-        {
-            if(reply.equalsIgnoreCase("gas"))
-            {
-                getDeath(randomTrap);
-                Runner.gameOff();
+            if (randomTrap == 3) {
+                if (!reply.equalsIgnoreCase("car")) {
+                    System.out.println(getDeath(randomTrap));
+                    Runner.gameOff();
+                }
+                cleared  = true;
+                answer.close();
             }
-
         }
-
     }
     public String getDeath(int x)
     {
@@ -71,8 +71,5 @@ public class TrapRoom extends Room {
         String str = riddles[z];
         return str;
     }
-    public void leaveRoom(Person x)
-    {
-        occupant = null;
-    }
+
 }

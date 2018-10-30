@@ -7,6 +7,7 @@ public class Person {
 	String firstName;
 	String familyName;
 	int xLoc, yLoc;
+	public Boolean alive = true;
 
 
 	public int getxLoc() {

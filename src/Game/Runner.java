@@ -5,6 +5,7 @@ import Rooms.Room;
 import Rooms.TrapRoom;
 import Rooms.WinningRoom;
 
+import javax.xml.bind.SchemaOutputResolver;
 import java.util.Scanner;
 
 import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
@@ -15,33 +16,32 @@ public class Runner {
 	private static boolean gameOn = true;
 	
 	public static void main(String[] args) {
+
 		Room[][] building = new Room[5][5];
 		Board dungeon = new Board(building);
 		//Fill the building with normal rooms
 		for (int x = 0; x < building.length; x++) {
 			for (int y = 0; y < building[x].length; y++) {
 				building[x][y] = new Room(x, y);
+
 			}
 		}
 		dungeon.generateSpecial();
 		 //Setup player 1 and the input scanner
-		Person player1 = new Person("FirstName", "FamilyName", 0,0);
+		Person player1 = new Person(0,0,100);
 		building[0][0].enterRoom(player1);
 		Scanner in = new Scanner(System.in);
-		while(gameOn)
+		while(gameOn && player1.alive)
 		{
-			System.out.println("Where would you like to move? (Choose N, S, E, W)");
+			System.out.println("Where would you like to move? (Choose W,A,S,D)");
 			String move = in.nextLine();
 			if(validMove(move, player1, building))
 			{
-				System.out.println("Your coordinates: row = " + player1.getxLoc() + " col = " + player1.getyLoc());
-				
+				System.out.println(dungeon.toString(player1));
 			}
 			else {
 				System.out.println("Please choose a valid move.");
 			}
-			
-			
 		}
 		in.close();
 	}
@@ -57,7 +57,7 @@ public class Runner {
 	{
 		move = move.toLowerCase().trim();
 		switch (move) {
-			case "n":
+			case "w":
 				if (p.getxLoc() > 0)
 				{
 					map[p.getxLoc()][p.getyLoc()].leaveRoom(p);
@@ -68,7 +68,7 @@ public class Runner {
 				{
 					return false;
 				}
-			case "e":
+			case "d":
 				if (p.getyLoc()< map[p.getyLoc()].length -1)
 				{
 					map[p.getxLoc()][p.getyLoc()].leaveRoom(p);
@@ -92,7 +92,7 @@ public class Runner {
 					return false;
 				}
 
-			case "w":
+			case "a":
 				if (p.getyLoc() > 0)
 				{
 					map[p.getxLoc()][p.getyLoc()].leaveRoom(p);

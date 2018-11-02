@@ -36,9 +36,18 @@ public class TrapRoom extends Room {
 
             }
             if (randomTrap == 1) {
-                if (!reply.equalsIgnoreCase("blue wire")) {
-                    System.out.println(getDeath(randomTrap));
-                    Runner.gameOff();
+                double guess = Math.random();
+                if(guess > .5) {
+                    if (!reply.equalsIgnoreCase("blue wire")) {
+                        System.out.println(getDeath(randomTrap));
+                        Runner.gameOff();
+                    }
+                }
+                if(guess <= .5) {
+                    if (!reply.equalsIgnoreCase("red wire")) {
+                        System.out.println(getDeath(randomTrap));
+                        Runner.gameOff();
+                    }
                 }
                 cleared  = true;
                 Board.traproomClear = true;

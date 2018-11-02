@@ -2,9 +2,13 @@ package Rooms;
 
 import People.Person;
 
+import static Game.Runner.gameOff;
+
 public class Room {
 	Person occupant;
+	public boolean cleared = false;
 	int xLoc,yLoc;
+	public boolean special = false;
 	
 	public Room(int x, int y)
 	{
@@ -18,8 +22,19 @@ public class Room {
 	 */
 	public void enterRoom(Person x)
 	{
+		if(x.poisoned)
+		{
+			System.out.println("The poison eats away at you. You take 5 damage.");
+			x.hp -= 5;
+			if(x.hp<=0)
+			{
+
+				gameOff();
+			}
+		}
 		System.out.println("You enter a plain old room");
 		occupant = x;
+		cleared = true;
 		x.setxLoc(this.xLoc);
 		x.setyLoc(this.yLoc);
 	}

@@ -31,8 +31,10 @@ public class Runner {
 		Person player1 = new Person(0,0,100);
 		building[0][0].enterRoom(player1);
 		Scanner in = new Scanner(System.in);
+		System.out.println(dungeon.toString(player1));
 		while(gameOn && player1.alive)
 		{
+
 			System.out.println("Where would you like to move? (Choose W,A,S,D)");
 			String move = in.nextLine();
 			if(validMove(move, player1, building))

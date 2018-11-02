@@ -10,6 +10,8 @@ public class Person {
 	public int hp = 100;
 	public boolean amnesia = false;
 	public boolean map = false;
+	public boolean poisoned = false;
+	public int gold = 0;
 
 
 	public int getxLoc() {

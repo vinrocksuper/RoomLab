@@ -54,6 +54,7 @@ public class Event extends Room
                 if(n>.5)
                 {
                     System.out.println("You find a bag of gold!");
+                    x.gold += 50;
                 }
                 else
                 {
@@ -61,7 +62,48 @@ public class Event extends Room
                     x.hp -= 50;
                 }
             }
+            else
+            {
+                System.out.println("You ignore the chest and move on.");
+            }
+
         }
+        if(randomEvent == 3)
+        {
+            System.out.println("Do you want to drink the potion?");
+            Scanner a = new Scanner(System.in);
+            String rep = a.nextLine();
+            if(rep.equalsIgnoreCase("yes")||rep.equalsIgnoreCase("y"))
+            {
+                double n = Math.random();
+                if(n>.5)
+                {
+                    System.out.println("You are poisoned!");
+                    x.poisoned = true;
+                }
+                else
+                {
+                    System.out.println("You feel rejuvenated. You are restored to full hp.");
+                    if(x.poisoned == true)
+                    {
+                        x.poisoned = false;
+                        System.out.println("The potion also cured your poison status");
+                    }
+                    if(x.amnesia)
+                    {
+                        x.amnesia = true;
+                        System.out.println("The potion cleared your amnesia");
+                    }
+                    x.hp =100;
+                }
+            }
+            else
+            {
+                System.out.println("You ignore the potion and move on.");
+            }
+
+        }
+        this.cleared = true;
     }
 
 }

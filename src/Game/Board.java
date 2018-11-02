@@ -27,32 +27,35 @@ public class Board {
             y = (int) (Math.random() * rooms.length);
         }
         rooms[x][y] = new WinningRoom(x, y);
+        rooms[x][y].special = true;
         //Create a random trap room that can't be the same room as the winning room.
         while (a == 0 && b == 0)
         {
             a =(int) (Math.random() * rooms.length);
             b =(int) (Math.random() * rooms.length);
-            if(a == x && b ==y)
+            if(rooms[a][b].special)
             {
                 a=0;
                 b=0;
             }
         }
         rooms[a][b] = new TrapRoom(a, b);
-        //Generates an event room
-        int c =0;
-        int d =0;
-        while (c == 0 && d == 0)
-        {
-            c =(int) (Math.random() * rooms.length);
-            d =(int) (Math.random() * rooms.length);
-            if(c == x && d ==y || c == a && d == b)
-            {
-                c=0;
-                d=0;
+        rooms[a][b].special = true;
+        //Generates multiple event rooms
+        for(int i=0;i<4;i++) {
+            int c = 0;
+            int d = 0;
+            while (c == 0 && d == 0) {
+                c = (int) (Math.random() * rooms.length);
+                d = (int) (Math.random() * rooms.length);
+                if (rooms[c][d].special) {
+                    c = 0;
+                    d = 0;
+                }
             }
+            rooms[c][d] = new Event(c, d);
+            rooms[c][d].special = true;
         }
-        rooms[c][d] = new Event(c,d);
     }
     public String toString()
     {
@@ -79,19 +82,24 @@ public class Board {
                 {
                     str += " [X] ";
                 }
-                else if(traproomClear && j==b && i==a || p.map)
+                else if(traproomClear && j==b && i==a || p.map && j==b && i==a)
                 {
                     str += " [T] ";
+                }
+                else if(rooms[i][j].cleared == false)
+                {
+                    str += " [?] ";
                 }
                 else
                     str += " [ ] ";
             }
             str += "\n";
         }
-        if(p.amnesia)
+        if(p.amnesia && p.map == false)
         {
             str = "";
         }
+
         return str;
     }
 

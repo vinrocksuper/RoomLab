@@ -16,6 +16,10 @@ public class Board {
     {
         this.rooms = a;
     }
+    public Board(int x,int y)
+    {
+        rooms = new Room[x][y];
+    }
 
     public void generateSpecial()
     {
@@ -86,7 +90,8 @@ public class Board {
                 {
                     str += " [T] ";
                 }
-                else if(rooms[i][j].cleared == false)
+
+                else if(!rooms[i][j].cleared)
                 {
                     str += " [?] ";
                 }

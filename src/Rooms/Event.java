@@ -7,6 +7,7 @@ import java.util.Scanner;
 public class Event extends Room
 {
     private int randomEvent = (int)(Math.random()*5);
+    public boolean[] eventClear = {false,false,false,false,false};
 
 
     public Event(int x, int y)
@@ -34,14 +35,17 @@ public class Event extends Room
         if(randomEvent == 4)
         {
             x.amnesia = true;
+            eventClear[4]= true;
         }
         if(randomEvent == 0)
         {
             x.map = true;
+            eventClear[0]=true;
         }
         if(randomEvent == 1)
         {
             x.hp -= 50;
+            eventClear[1]=true;
         }
         if(randomEvent ==2)
         {
@@ -55,12 +59,14 @@ public class Event extends Room
                 {
                     System.out.println("You find a bag of gold!");
                     x.gold += 50;
+
                 }
                 else
                 {
                     System.out.println("The chest was trapped! You took 50 damage!");
                     x.hp -= 50;
                 }
+                eventClear[2]=true;
             }
             else
             {
@@ -96,6 +102,7 @@ public class Event extends Room
                     }
                     x.hp =100;
                 }
+                eventClear[3]=true;
             }
             else
             {

@@ -7,7 +7,8 @@ import static Game.Runner.gameOff;
 public class Room {
 	Person occupant;
 	public boolean cleared = false;
-	int xLoc,yLoc;
+	int xLoc;
+	int yLoc;
 	public boolean special = false;
 	
 	public Room(int x, int y)

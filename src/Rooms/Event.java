@@ -4,10 +4,12 @@ import People.Person;
 
 import java.util.Scanner;
 
+import static Game.Runner.gameOff;
+
 public class Event extends Room
 {
     private int randomEvent = (int)(Math.random()*5);
-    public boolean[] eventClear = {false,false,false,false,false};
+    private boolean[] eventClear = {false,false,false,false,false};
 
 
     public Event(int x, int y)
@@ -17,6 +19,17 @@ public class Event extends Room
     }
     public void enterRoom(Person x)
     {
+
+        if(x.poisoned)
+        {
+            System.out.println("The poison eats away at you. You take 5 damage.");
+            x.hp -= 5;
+            if(x.hp<=0)
+            {
+
+                gameOff();
+            }
+        }
         getEvent(x);
         occupant = x;
         x.setxLoc(this.xLoc);
@@ -27,7 +40,7 @@ public class Event extends Room
     {
         occupant = null;
     }
-    public void getEvent(Person x)
+    private void getEvent(Person x)
     {
         String[] events = {"You found a map!","You accidentally stub your toe.","You find a treasure chest!","There's a potion on the ground.","You hit your head and now you have amnesia."};
         String str = events[randomEvent];
@@ -44,7 +57,8 @@ public class Event extends Room
         }
         if(randomEvent == 1)
         {
-            x.hp -= 50;
+            System.out.println("You take 10 damage.");
+            x.hp -= 10;
             eventClear[1]=true;
         }
         if(randomEvent ==2)
@@ -90,14 +104,14 @@ public class Event extends Room
                 else
                 {
                     System.out.println("You feel rejuvenated. You are restored to full hp.");
-                    if(x.poisoned == true)
+                    if(x.poisoned)
                     {
                         x.poisoned = false;
                         System.out.println("The potion also cured your poison status");
                     }
                     if(x.amnesia)
                     {
-                        x.amnesia = true;
+                        x.amnesia = false;
                         System.out.println("The potion cleared your amnesia");
                     }
                     x.hp =100;

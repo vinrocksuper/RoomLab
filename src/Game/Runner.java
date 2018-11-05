@@ -14,10 +14,11 @@ public class Runner {
 	
 
 	private static boolean gameOn = true;
-	
+	public static boolean floorClear = false;
 	public static void main(String[] args) {
-
-		Room[][] building = new Room[5][5];
+		int a = 3;
+		int b = 3;
+		Room[][] building = new Room[3][3];
 		Board dungeon = new Board(building);
 		//Fill the building with normal rooms
 		for (int x = 0; x < building.length; x++) {
@@ -27,26 +28,59 @@ public class Runner {
 			}
 		}
 		dungeon.generateSpecial();
-		 //Setup player 1 and the input scanner
-		Person player1 = new Person(0,0,100);
+		//Setup player 1 and the input scanner
+		Person player1 = new Person(0, 0, 100);
 		building[0][0].enterRoom(player1);
 		Scanner in = new Scanner(System.in);
 		System.out.println(dungeon.toString(player1));
-		while(gameOn && player1.alive)
-		{
 
-			System.out.println("Where would you like to move? (Choose W,A,S,D)");
-			String move = in.nextLine();
-			if(validMove(move, player1, building))
-			{
-				System.out.println(dungeon.toString(player1));
+		while (gameOn && player1.hp>0) {
+			if (floorClear) {
+				System.out.println("Where would you like to move? (Choose W,A,S,D)");
+				String move = in.nextLine();
+				if (validMove(move, player1, building)) {
+					System.out.println(dungeon.toString(player1));
+				}
+
+				if (move.equalsIgnoreCase("y") || move.equalsIgnoreCase("yes")) {
+					a++;
+					b++;
+					building = new Room[a][b];
+					dungeon = new Board(building);
+					//Fill the building with normal rooms
+					for (int x = 0; x < building.length; x++) {
+						for (int y = 0; y < building[x].length; y++) {
+							building[x][y] = new Room(x, y);
+
+						}
+					}
+					dungeon.generateSpecial();
+					floorClear =false;
+					player1.map = false;
+					if(player1.poisoned) {
+						player1.poisoned = false;
+						System.out.println("The effects of the poison wore off");
+					}
+					building[player1.getxLoc()][player1.getyLoc()].enterRoom(player1);
+					System.out.println(dungeon.toString(player1));
+				}
 			}
-			else {
-				System.out.println("Please choose a valid move.");
+			if (!floorClear) {
+				{
+					System.out.println("Where would you like to move? (Choose W,A,S,D)");
+					String move = in.nextLine();
+					if (validMove(move, player1, building)) {
+						System.out.println(dungeon.toString(player1));
+					}
+				}
 			}
+			else{
+					System.out.println("Please choose a valid move.");
+				}
+			}
+			in.close();
 		}
-		in.close();
-	}
+
 
 	/**
 	 * Checks that the movement chosen is within the valid game map.

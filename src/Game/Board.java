@@ -10,6 +10,8 @@ public class Board {
     private Room[][] rooms;
     public static boolean traproomClear = false;
     private boolean first = false;
+    int x = 0;
+    int y = 0;
     private int a = 0;
     private int b = 0;
     public Board(Room[][] a)
@@ -24,8 +26,7 @@ public class Board {
     public void generateSpecial()
     {
         //Create a random winning room.
-        int x = 0;
-        int y = 0;
+
         while (x == 0 && y == 0) {
             x = (int) (Math.random() * rooms.length);
             y = (int) (Math.random() * rooms.length);
@@ -95,12 +96,16 @@ public class Board {
                 {
                     str += " [?] ";
                 }
+                else if(Runner.floorClear && j==y && i==x || p.map && j==y && i==x)
+                {
+                    str += " [V} ";
+                }
                 else
                     str += " [ ] ";
             }
             str += "\n";
         }
-        if(p.amnesia && p.map == false)
+        if(p.amnesia && !p.map)
         {
             str = "";
         }

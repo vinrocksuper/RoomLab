@@ -17,7 +17,7 @@ public class TrapRoom extends Room {
     public void enterRoom(Person x) {
         occupant = x;
 
-        while(occupant.alive && cleared ==false) {
+        while(occupant.alive && !cleared) {
             x.setxLoc(xLoc);
             x.setyLoc(yLoc);
             int randomTrap = (int) ((Math.random()) * 3);
@@ -36,22 +36,29 @@ public class TrapRoom extends Room {
 
             }
             if (randomTrap == 1) {
-                double guess = Math.random();
-                if(guess > .5) {
-                    if (!reply.equalsIgnoreCase("blue wire")) {
-                        System.out.println(getDeath(randomTrap));
-                        Runner.gameOff();
-                    }
+                if(x.defuser)
+                {
+                    System.out.println("You take out your trusty defuser and disarm the bomb without worries.");
+                    cleared = true;
+                    Board.traproomClear = true;
                 }
-                if(guess <= .5) {
-                    if (!reply.equalsIgnoreCase("red wire")) {
-                        System.out.println(getDeath(randomTrap));
-                        Runner.gameOff();
+                if(!x.defuser) {
+                    double guess = Math.random();
+                    if (guess > .5) {
+                        if (!reply.equalsIgnoreCase("blue wire")) {
+                            System.out.println(getDeath(randomTrap));
+                            Runner.gameOff();
+                        }
                     }
+                    if (guess <= .5) {
+                        if (!reply.equalsIgnoreCase("red wire")) {
+                            System.out.println(getDeath(randomTrap));
+                            Runner.gameOff();
+                        }
+                    }
+                    cleared = true;
+                    Board.traproomClear = true;
                 }
-                cleared  = true;
-                Board.traproomClear = true;
-
             }
             if (randomTrap == 2) {
                 if (!reply.equalsIgnoreCase("car")) {

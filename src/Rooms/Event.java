@@ -24,9 +24,9 @@ public class Event extends Room
         {
             System.out.println("The poison eats away at you. You take 5 damage.");
             x.hp -= 5;
+            System.out.println("You now have " + x.hp + "health");
             if(x.hp<=0)
             {
-
                 gameOff();
             }
         }
@@ -42,12 +42,18 @@ public class Event extends Room
     }
     private void getEvent(Person x)
     {
-        String[] events = {"You found a map!","You accidentally stub your toe.","You find a treasure chest!","There's a potion on the ground.","You hit your head and now you have amnesia."};
+        String[] events = {"You found a map!","You accidentally stub your toe.","You find a treasure chest!","There's a potion on the ground.","You hit your head and now you have amnesia.", "You find a small pouch of gold on the ground"};
         String str = events[randomEvent];
         System.out.println(str);
         if(randomEvent == 4)
         {
             x.amnesia = true;
+            if(x.pill)
+            {
+                System.out.println("How peculiar, even though your head hurts, you can recall everything just fine.");
+                x.amnesia = false;
+            }
+
             eventClear[4]= true;
         }
         if(randomEvent == 0)
@@ -59,6 +65,7 @@ public class Event extends Room
         {
             System.out.println("You take 10 damage.");
             x.hp -= 10;
+            System.out.println("You now have " + x.hp + "health");
             eventClear[1]=true;
         }
         if(randomEvent ==2)
@@ -73,7 +80,7 @@ public class Event extends Room
                 {
                     System.out.println("You find a bag of gold!");
                     x.gold += 50;
-
+                    System.out.println("You now have " + x.gold + " gold");
                 }
                 else
                 {
@@ -123,6 +130,11 @@ public class Event extends Room
                 System.out.println("You ignore the potion and move on.");
             }
 
+        }
+        if(randomEvent == 5)
+        {
+            x.gold += 10;
+            System.out.println("You now have " + x.gold + "gold.");
         }
         this.cleared = true;
     }

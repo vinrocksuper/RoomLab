@@ -11,8 +11,9 @@ public class Person {
 	public boolean amnesia = false;
 	public boolean map = false;
 	public boolean poisoned = false;
-	public int gold = 0;
-
+	public int gold = 100;
+	public boolean pill = false;
+	public boolean defuser = false;
 
 	public int getxLoc() {
 		return xLoc;

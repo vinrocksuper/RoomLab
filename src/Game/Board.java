@@ -1,10 +1,7 @@
 package Game;
 
 import People.Person;
-import Rooms.Event;
-import Rooms.Room;
-import Rooms.TrapRoom;
-import Rooms.WinningRoom;
+import Rooms.*;
 
 public class Board {
     private Room[][] rooms;
@@ -14,6 +11,8 @@ public class Board {
     int y = 0;
     private int a = 0;
     private int b = 0;
+
+
     public Board(Room[][] a)
     {
         this.rooms = a;
@@ -61,7 +60,23 @@ public class Board {
             rooms[c][d] = new Event(c, d);
             rooms[c][d].special = true;
         }
+        int i = 0;
+        int j =0;
+        while(i == 0 && j ==0)
+        {
+            i = (int) (Math.random() * rooms.length);
+            j = (int) (Math.random() * rooms.length);
+            if (rooms[i][j].special) {
+                i = 0;
+                j = 0;
+            }
+        }
+        rooms[i][j] = new Shop(i,j);
+        rooms[i][j].special = true;
+
     }
+
+
     public String toString()
     {
         String str ="";

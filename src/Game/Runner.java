@@ -12,7 +12,7 @@ import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 
 public class Runner {
 	
-
+	private static int floor = 1;
 	private static boolean gameOn = true;
 	public static boolean floorClear = false;
 	public static void main(String[] args) {
@@ -41,6 +41,11 @@ public class Runner {
 				if (validMove(move, player1, building)) {
 					System.out.println(dungeon.toString(player1));
 				}
+				else{
+
+					System.out.println("Please choose a valid move.");
+
+				}
 
 				if (move.equalsIgnoreCase("y") || move.equalsIgnoreCase("yes")) {
 					a++;
@@ -63,6 +68,7 @@ public class Runner {
 					}
 					building[player1.getxLoc()][player1.getyLoc()].enterRoom(player1);
 					System.out.println(dungeon.toString(player1));
+					floor++;
 				}
 			}
 			if (!floorClear) {
@@ -72,11 +78,14 @@ public class Runner {
 					if (validMove(move, player1, building)) {
 						System.out.println(dungeon.toString(player1));
 					}
+					else{
+
+						System.out.println("Please choose a valid move.");
+
+					}
 				}
 			}
-			else{
-					System.out.println("Please choose a valid move.");
-				}
+
 			}
 			in.close();
 		}
@@ -148,6 +157,18 @@ public class Runner {
 	public static void gameOff()
 	{
 		gameOn = false;
+		if(floor % 10 == 1) {
+			System.out.println("You lost on the " + floor + "st floor");
+		}
+		if(floor %10 == 2){
+			System.out.println("You lost on the " + floor + "nd floor");
+		}
+		if(floor %10 == 3){
+			System.out.println("You lost on the " + floor + "rd floor");
+		}
+		if(floor %10 == 4 ||floor %10 == 0 || floor %10 == 5 || floor %10 == 6|| floor %10 == 7|| floor %10 == 8 || floor %10 == 9){
+			System.out.println("You lost on the " + floor + "th floor");
+		}
 	}
 	
 

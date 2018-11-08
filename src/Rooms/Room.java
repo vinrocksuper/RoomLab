@@ -1,6 +1,6 @@
 package Rooms;
 
-import People.Person;
+import Entities.Person;
 
 import static Game.Runner.gameOff;
 

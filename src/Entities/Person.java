@@ -1,4 +1,4 @@
-package People;
+package Entities;
 
 /**
  * Person represents the player as they move through the game.
@@ -14,6 +14,8 @@ public class Person {
 	public int gold = 100;
 	public boolean pill = false;
 	public boolean defuser = false;
+	public int dex = 10;
+	public int str = 10;
 
 	public int getxLoc() {
 		return xLoc;

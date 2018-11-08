@@ -1,6 +1,6 @@
 package Rooms;
 
-import People.Person;
+import Entities.Person;
 
 import java.util.Scanner;
 
@@ -24,7 +24,7 @@ public class Event extends Room
         {
             System.out.println("The poison eats away at you. You take 5 damage.");
             x.hp -= 5;
-            System.out.println("You now have " + x.hp + "health");
+            System.out.println("You now have " + x.hp + " health");
             if(x.hp<=0)
             {
                 gameOff();

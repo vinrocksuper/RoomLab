@@ -1,18 +1,13 @@
 package Game;
 
-import People.Person;
+import Entities.Person;
 import Rooms.Room;
-import Rooms.TrapRoom;
-import Rooms.WinningRoom;
 
-import javax.xml.bind.SchemaOutputResolver;
 import java.util.Scanner;
-
-import static com.sun.org.apache.xalan.internal.xsltc.compiler.util.Type.Int;
 
 public class Runner {
 	
-	private static int floor = 1;
+	public static int floor = 1;
 	private static boolean gameOn = true;
 	public static boolean floorClear = false;
 	public static void main(String[] args) {
@@ -27,9 +22,10 @@ public class Runner {
 
 			}
 		}
-		dungeon.generateSpecial();
-		//Setup player 1 and the input scanner
 		Person player1 = new Person(0, 0, 100);
+		dungeon.generateSpecial(player1);
+		//Setup player 1 and the input scanner
+
 		building[0][0].enterRoom(player1);
 		Scanner in = new Scanner(System.in);
 		System.out.println(dungeon.toString(player1));
@@ -59,7 +55,7 @@ public class Runner {
 
 						}
 					}
-					dungeon.generateSpecial();
+					dungeon.generateSpecial(player1);
 					floorClear =false;
 					player1.map = false;
 					if(player1.poisoned) {
@@ -68,6 +64,10 @@ public class Runner {
 					}
 					building[player1.getxLoc()][player1.getyLoc()].enterRoom(player1);
 					System.out.println(dungeon.toString(player1));
+					int strGain = (int) Math.random() * building.length;
+					int dexGain = (int) Math.random() * building.length;
+					player1.dex += dexGain;
+					player1.str += strGain;
 					floor++;
 				}
 			}

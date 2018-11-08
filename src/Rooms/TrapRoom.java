@@ -2,7 +2,7 @@ package Rooms;
 
 import Game.Board;
 import Game.Runner;
-import People.Person;
+import Entities.Person;
 
 import java.util.Scanner;
 

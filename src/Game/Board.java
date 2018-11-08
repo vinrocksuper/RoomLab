@@ -1,7 +1,10 @@
 package Game;
 
-import People.Person;
+import Entities.Monster;
+import Entities.Person;
 import Rooms.*;
+
+import static Game.Runner.floor;
 
 public class Board {
     private Room[][] rooms;
@@ -22,7 +25,7 @@ public class Board {
         rooms = new Room[x][y];
     }
 
-    public void generateSpecial()
+    public void generateSpecial(Person p)
     {
         //Create a random winning room.
 
@@ -73,6 +76,24 @@ public class Board {
         }
         rooms[i][j] = new Shop(i,j);
         rooms[i][j].special = true;
+        if(floor < 2)
+        {
+            for(int z=0;z<(rooms.length+5)/3;z++)
+            {
+                int l =(int) (Math.random() * rooms.length);
+                int w =(int) (Math.random() * rooms.length);
+                rooms[l][w] = new Monster(l,w,(int) (Math.random() * rooms.length),(int) (Math.random() * rooms.length)-2,0,true);
+            }
+        }
+        if(floor >= 2)
+        {
+            for(int z=0;z<(rooms.length+5)/2;z++)
+            {
+                int l =(int) (Math.random() * rooms.length);
+                int w =(int) (Math.random() * rooms.length);
+                rooms[l][w] = new Monster(l,w,(int) (Math.random() * rooms.length)+10,(int) (Math.random() * rooms.length)+5,(int) (Math.random() * rooms.length)+5);
+            }
+        }
 
     }
 

@@ -25,7 +25,11 @@ public class Board {
         rooms = new Room[x][y];
     }
 
-    public void generateSpecial(Person p)
+    /**
+     * Generates all the special rooms including combat.
+     *
+     */
+    public void generateSpecial()
     {
         //Create a random winning room.
 
@@ -97,20 +101,11 @@ public class Board {
 
     }
 
-
-    public String toString()
-    {
-        String str ="";
-        for(int i=0;i<rooms.length;i++)
-        {
-            for(int j=0;j<rooms[i].length;j++)
-            {
-                str += " [ ] ";
-            }
-            str += "\n";
-        }
-        return str;
-    }
+    /**
+     * Prints out the map
+     * @param p tells where the player is
+     * @return returns the map to be printed
+     */
     public String toString(Person p)
     {
         String str ="";

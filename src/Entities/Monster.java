@@ -35,6 +35,14 @@ public class Monster extends Room implements Enemies{
     public void generate(int x, int y,Person p) {
 
     }
+
+    /** Spawns a sleeping monster. It takes bonus damage on the 1st hit.
+     *
+     * @param x where monster spawns(X coord)
+     * @param y where monster spawns(Y coord)
+     * @param sleep Overloaded constructor. Monsters are always sleeping if they spawn on the 1st or 2nd floor.
+     * @param p The player's character
+     */
     public void generate(int x, int y, boolean sleep,Person p)
     {
         System.out.println("You find a sleeping monster. Do you attack it?");
@@ -87,12 +95,21 @@ public class Monster extends Room implements Enemies{
 
     }
 
+    /**
+     * Calculates the damage taken by the attack
+     * @param x The player's character
+     * @return returns the damage dealt to the player
+     */
     @Override
     public int dealDamage(Person x) {
         return  (attack*2 -x.dex);
 
     }
 
+    /**
+     * randomly gives gold to the player after combat
+     * @return the amount of gold that the player gets
+     */
     @Override
     public int dropGold() {
         int gold = (int)(Math.random()*(hp+attack+resist)/3);

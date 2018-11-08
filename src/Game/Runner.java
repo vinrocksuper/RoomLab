@@ -23,7 +23,7 @@ public class Runner {
 			}
 		}
 		Person player1 = new Person(0, 0, 100);
-		dungeon.generateSpecial(player1);
+		dungeon.generateSpecial();
 		//Setup player 1 and the input scanner
 
 		building[0][0].enterRoom(player1);
@@ -55,7 +55,7 @@ public class Runner {
 
 						}
 					}
-					dungeon.generateSpecial(player1);
+					dungeon.generateSpecial();
 					floorClear =false;
 					player1.map = false;
 					if(player1.poisoned) {

@@ -47,14 +47,15 @@ public class Event extends Room
         System.out.println(str);
         if(randomEvent == 4)
         {
-            x.amnesia = true;
-            if(x.pill)
-            {
-                System.out.println("How peculiar, even though your head hurts, you can recall everything just fine.");
-                x.amnesia = false;
-            }
+            if(!eventClear[4]) {
+                x.amnesia = true;
+                if (x.pill) {
+                    System.out.println("How peculiar, even though your head hurts, you can recall everything just fine.");
+                    x.amnesia = false;
+                }
 
-            eventClear[4]= true;
+                eventClear[4] = true;
+            }
         }
         if(randomEvent == 0)
         {

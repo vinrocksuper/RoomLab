@@ -7,7 +7,7 @@ import static Game.Runner.gameOff;
 
 public class WinningRoom extends Room
 {
-
+	private boolean winning = true;
 	public WinningRoom(int x, int y) {
 		super(x, y);
 

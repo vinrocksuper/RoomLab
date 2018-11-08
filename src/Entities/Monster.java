@@ -115,5 +115,11 @@ public class Monster extends Room implements Enemies{
         int gold = (int)(Math.random()*(hp+attack+resist)/3);
         return gold;
     }
+    public String toString()
+    {
+        String str="";
+
+        return str;
+    }
 
 }

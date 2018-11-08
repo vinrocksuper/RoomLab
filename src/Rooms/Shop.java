@@ -44,22 +44,32 @@ public class Shop extends Room{
                 System.out.println("You find a shop inside this twisted dungeon. The shop keeper nods his head towards you, as if you've met before.(Type exit to leave)");
                 System.out.println("You see there's a few items for sale. You have " + x.gold + " gold (Type exit to leave)");
                 for (int i = 0; i < items.length; i++) {
-                    System.out.println("There is a(n) " + items[i] + " for sale for " + cost[i]);
+                    if (items[i] != null){
+                        System.out.println("There is a(n) " + items[i] + " for sale for " + cost[i]);
+                }
                 }
             }
             if (cleared) {
                 System.out.println("Welcome back.");
                 System.out.println("You have " +x.gold + " gold");
                 for (int i = 0; i < items.length; i++) {
-                    System.out.println("There is a(n) " + items[i] + " for sale for " + cost[i]);
+                    if(items[i] != null) {
+                        System.out.println("There is a(n) " + items[i] + " for sale for " + cost[i]);
+                    }
                 }
             }
 
             Scanner q = new Scanner(System.in);
             String n = q.nextLine();
         while(occupied) {
+            if(n.equalsIgnoreCase("exit"))
+            {
+                System.out.println("you leave the store");
+                occupied = false;
+            }
+
             if (n.equalsIgnoreCase(items[1])) {
-                System.out.println("Are you sure you want to buy " + items[1] + "?");
+                System.out.println("Are you sure you want to buy a(n)" + items[1] + "?");
                 n = q.nextLine();
                 if (n.equalsIgnoreCase("yes") || n.equalsIgnoreCase("y")) {
 
@@ -71,7 +81,7 @@ public class Shop extends Room{
                     {
                         x.gold -= cost[1];
                         System.out.println("You are no longer poisoned. "+ "You now have " + x.gold + " gold");
-
+                        items[1] = null;
                         x.poisoned = false;
                         occupied = false;
                     }
@@ -89,8 +99,8 @@ public class Shop extends Room{
                     else
                     {
                         x.gold -= cost[2];
-                        System.out.println("You acquired " + items[2]+ "You now have " + x.gold + " gold");
-
+                        System.out.println("You acquired " + items[2]+ " You now have " + x.gold + " gold");
+                        items[2] = null;
                         x.map = true;
                         occupied = false;
                     }
@@ -109,8 +119,10 @@ public class Shop extends Room{
                     {
                         x.gold -= cost[3];
                         System.out.println("You feel restored. You gain 50hp. "+ "You now have " + x.gold + " gold");
-                        System.out.println("You now have " + x.hp + "health");
+
                         x.hp += 50;
+                        System.out.println("You now have " + x.hp + "health");
+                        items[3] = null;
                         occupied = false;
                     }
                 }
@@ -134,9 +146,16 @@ public class Shop extends Room{
                             System.out.println("Suddenly, your memories start flowing back to you. Your amnesia is cured.");
 
                         }
+                        if(Math.random()>.7)
+                        {
+                            System.out.println("You feel stronger and faster.");
+                            x.dex++;
+                            x.str++;
+                        }
                         x.pill = true;
                         x.amnesia = false;
                         occupied = false;
+                        items[4] = null;
                     }
                 }
             }
@@ -152,8 +171,8 @@ public class Shop extends Room{
                     else
                     {
                         x.gold -= cost[0];
-                        System.out.println("You acquired a" + items[0]+ "You now have " + x.gold + " gold");
-
+                        System.out.println("You acquired a " + items[0]+ " You now have " + x.gold + " gold");
+                        items[1] = null;
                         x.defuser = true;
                         occupied = false;
                     }

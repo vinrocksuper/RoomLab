@@ -26,7 +26,7 @@ public class Board {
     }
 
     /**
-     * Generates all the special rooms including combat.
+     * Generates all the special rooms. More trap rooms spawn with each floor after the 2nd.
      *
      */
     public void generateSpecial()
@@ -42,12 +42,26 @@ public class Board {
         //Create a random trap room that can't be the same room as the winning room.
         while (a == 0 && b == 0)
         {
-            a =(int) (Math.random() * rooms.length);
-            b =(int) (Math.random() * rooms.length);
-            if(rooms[a][b].special)
-            {
-                a=0;
-                b=0;
+            if(floor > 2) {
+                for (int i = 0; i < rooms.length / 2; i++) {
+                    a = (int) (Math.random() * rooms.length);
+                    b = (int) (Math.random() * rooms.length);
+                    if (rooms[a][b].special) {
+                        a = 0;
+                        b = 0;
+                    }
+
+                rooms[a][b] = new TrapRoom(a, b);
+                rooms[a][b].special = true;
+                }
+            }
+            else {
+                a = (int) (Math.random() * rooms.length);
+                b = (int) (Math.random() * rooms.length);
+                if (rooms[a][b].special) {
+                    a = 0;
+                    b = 0;
+                }
             }
         }
         rooms[a][b] = new TrapRoom(a, b);
@@ -80,24 +94,6 @@ public class Board {
         }
         rooms[i][j] = new Shop(i,j);
         rooms[i][j].special = true;
-        if(floor < 2)
-        {
-            for(int z=0;z<(rooms.length+5)/3;z++)
-            {
-                int l =(int) (Math.random() * rooms.length);
-                int w =(int) (Math.random() * rooms.length);
-                rooms[l][w] = new Monster(l,w,(int) (Math.random() * rooms.length),(int) (Math.random() * rooms.length)-2,0,true);
-            }
-        }
-        if(floor >= 2)
-        {
-            for(int z=0;z<(rooms.length+5)/2;z++)
-            {
-                int l =(int) (Math.random() * rooms.length);
-                int w =(int) (Math.random() * rooms.length);
-                rooms[l][w] = new Monster(l,w,(int) (Math.random() * rooms.length)+10,(int) (Math.random() * rooms.length)+5,(int) (Math.random() * rooms.length)+5);
-            }
-        }
 
     }
 

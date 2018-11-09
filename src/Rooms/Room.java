@@ -10,10 +10,12 @@ public class Room extends Cell {
 
 	public boolean cleared = false;
 	public boolean special = false;
-	public Monster m;
-	public boolean Monsterbeaten = false;
+
+
+	public String type;
 	public Room(int x, int y) {
 		super(x, y);
+		this.type = "room";
 	}
 
 	/**

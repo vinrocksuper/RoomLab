@@ -14,6 +14,7 @@ public class Shop extends Room{
     public Shop(int x, int y)
     {
         super(x,y);
+        this.type = "shop";
     }
 
     /**
@@ -62,12 +63,6 @@ public class Shop extends Room{
             Scanner q = new Scanner(System.in);
             String n = q.nextLine();
         while(occupied) {
-            if(n.equalsIgnoreCase("exit"))
-            {
-                System.out.println("you leave the store");
-                occupied = false;
-            }
-
             if (n.equalsIgnoreCase(items[1])) {
                 System.out.println("Are you sure you want to buy a(n)" + items[1] + "?");
                 n = q.nextLine();
@@ -146,7 +141,7 @@ public class Shop extends Room{
                             System.out.println("Suddenly, your memories start flowing back to you. Your amnesia is cured.");
 
                         }
-                        if(Math.random()>.7)
+                        if(Math.random()>.65)
                         {
                             System.out.println("You feel stronger and faster.");
                             x.dex++;

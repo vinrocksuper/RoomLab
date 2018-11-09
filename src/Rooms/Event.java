@@ -15,7 +15,7 @@ public class Event extends Room
     public Event(int x, int y)
     {
         super(x, y);
-
+        this.type = "event";
     }
     public void enterRoom(Person x)
     {
@@ -66,7 +66,7 @@ public class Event extends Room
         {
             System.out.println("You take 10 damage.");
             x.hp -= 10;
-            System.out.println("You now have " + x.hp + "health");
+            System.out.println("You now have " + x.hp + " health");
             eventClear[1]=true;
         }
         if(randomEvent ==2)
@@ -86,7 +86,9 @@ public class Event extends Room
                 else
                 {
                     System.out.println("The chest was trapped! You took 50 damage!");
+
                     x.hp -= 50;
+                    System.out.println("You now have " + x.hp + " health");
                 }
                 eventClear[2]=true;
             }

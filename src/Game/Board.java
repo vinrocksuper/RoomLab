@@ -94,6 +94,26 @@ public class Board {
         }
         rooms[i][j] = new Shop(i,j);
         rooms[i][j].special = true;
+        int t = 0;
+        int y =0;
+        while(t == 0 && y ==0)
+        {
+            t = (int) (Math.random() * rooms.length);
+            y = (int) (Math.random() * rooms.length);
+            if (rooms[t][y].special) {
+                t = 0;
+                y = 0;
+            }
+        }
+        Monster m = null;
+        if(floor <=2) {
+            m = new Monster(20, 8, 0, true);
+        }
+        else{
+            m = new Monster(20+4*floor,8+5*floor,2*floor);
+        }
+        rooms[t][y] = new MonsterRoom(t,y,m);
+        rooms[t][y].special = true;
 
     }
 
@@ -125,10 +145,15 @@ public class Board {
                 }
                 else if(Runner.floorClear && j==y && i==x || p.map && j==y && i==x)
                 {
-                    str += " [V} ";
+                    str += " [V] ";
                 }
-                else
-                    str += " [ ] ";
+                else if(rooms[i][j].type.equalsIgnoreCase("MOnster"))
+                {
+                    str += " [M] ";
+                }
+                else{
+                str += " [ ] ";
+            }
             }
             str += "\n";
         }

@@ -64,8 +64,8 @@ public class Runner {
 					}
 					building[player1.getxLoc()][player1.getyLoc()].enterRoom(player1);
 					System.out.println(dungeon.toString(player1));
-					int strGain = (int) Math.random() * building.length;
-					int dexGain = (int) Math.random() * building.length;
+					int strGain = (int) (Math.random() * building.length);
+					int dexGain = (int) (Math.random() * building.length);
 					player1.dex += dexGain;
 					player1.str += strGain;
 					floor++;

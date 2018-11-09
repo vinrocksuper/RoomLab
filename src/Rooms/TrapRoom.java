@@ -13,6 +13,7 @@ public class TrapRoom extends Room {
     public TrapRoom(int x,int y)
     {
         super(x,y);
+        this.type = "trap";
     }
 
     @Override
@@ -26,7 +27,7 @@ public class TrapRoom extends Room {
         while(occupant.alive && !cleared) {
             x.setxLoc(xLoc);
             x.setyLoc(yLoc);
-            if (Math.random() > .01) {
+            if (Math.random() > .49) {
                 SkillCheck(x);
             } else {
                 int randomTrap = (int) ((Math.random()) * 3);
@@ -118,7 +119,9 @@ public class TrapRoom extends Room {
                         Board.traproomClear = true;
                     } else {
                         System.out.println("You trip on a pebble and fall into an endless void.");
+                        occupant.alive = false;
                         Runner.gameOff();
+
                     }
 
 
@@ -130,7 +133,9 @@ public class TrapRoom extends Room {
                         Board.traproomClear = true;
                     } else {
                         System.out.println("You trip on a pebble and fall into an endless void.");
+                        occupant.alive = false;
                         Runner.gameOff();
+
                     }
                 }
             }
@@ -142,8 +147,10 @@ public class TrapRoom extends Room {
                     cleared = true;
                     Board.traproomClear = true;
                 } else {
-                    System.out.println("You trip on a pebble and fall into an endless void.");
+                    System.out.println("Your grip gives out and you plummet to your death.");
+                    occupant.alive = false;
                     Runner.gameOff();
+
                 }
 
 
@@ -154,7 +161,8 @@ public class TrapRoom extends Room {
                     cleared = true;
                     Board.traproomClear = true;
                 } else {
-                    System.out.println("You trip on a pebble and fall into an endless void.");
+                    System.out.println("Your grip gives out and you plummet to your death.");
+                    occupant.alive = false;
                     Runner.gameOff();
                 }
             }

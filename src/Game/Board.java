@@ -26,7 +26,7 @@ public class Board {
     }
 
     /**
-     * Generates all the special rooms. More trap rooms spawn with each floor after the 2nd.
+     * Generates all the special rooms. (Event, Combat, Trap, Shop, and Winning rooms)
      *
      */
     public void generateSpecial()
@@ -42,7 +42,7 @@ public class Board {
         //Create a random trap room that can't be the same room as the winning room.
         while (a == 0 && b == 0)
         {
-            if(floor > 2) {
+            if(floor > 3) {
                 for (int i = 0; i < rooms.length / 2; i++) {
                     a = (int) (Math.random() * rooms.length);
                     b = (int) (Math.random() * rooms.length);
@@ -110,7 +110,7 @@ public class Board {
             m = new Monster(20, 8, 0, true);
         }
         else{
-            m = new Monster(20+4*floor,8+5*floor,2*floor);
+            m = new Monster(20+4*floor,8+2*floor, floor);
         }
         rooms[t][y] = new MonsterRoom(t,y,m);
         rooms[t][y].special = true;

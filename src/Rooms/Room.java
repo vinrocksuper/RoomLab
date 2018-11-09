@@ -20,7 +20,7 @@ public class Room extends Cell {
 
 	/**
 	 * Method controls the results when a person enters this room.
-	 *
+	 * If the player is poisoned he/she will take 5 damage until the poison is cured or the player dies.
 	 * @param x the Person entering
 	 */
 	public void enterRoom(Person x) {

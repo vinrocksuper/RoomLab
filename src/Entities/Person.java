@@ -16,19 +16,35 @@ public class Person {
 	public boolean defuser = false;
 	public int dex = 10;
 	public int str = 10;
-
+	public int exp = 0;
+	public int level = 1;
+	/**
+	 * Gives the player's x Location
+	 * @return the x Location
+	 */
 	public int getxLoc() {
 		return xLoc;
 	}
 
+	/**
+	 * Changes the player's x Location
+	 * @param xLoc the new xLocation
+	 */
 	public void setxLoc(int xLoc) {
 		this.xLoc = xLoc;
 	}
-
+	/**
+	 * gets the player's y Location
+	 * @return the y Location
+	 */
 	public int getyLoc() {
 		return yLoc;
 	}
 
+	/**
+	 * Changes the player's y Location
+	 * @param yLoc the new yLocation
+	 */
 	public void setyLoc(int yLoc) {
 		this.yLoc = yLoc;
 	}

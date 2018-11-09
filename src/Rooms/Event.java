@@ -8,7 +8,7 @@ import static Game.Runner.gameOff;
 
 public class Event extends Room
 {
-    private int randomEvent = (int)(Math.random()*5);
+    private int randomEvent = (int)(Math.random()*6);
     private boolean[] eventClear = {false,false,false,false,false};
 
 
@@ -17,6 +17,11 @@ public class Event extends Room
         super(x, y);
         this.type = "event";
     }
+
+    /**
+     * Calls the function to generate an event and sets the player into the location.
+     * @param x the Person entering
+     */
     public void enterRoom(Person x)
     {
 
@@ -36,10 +41,20 @@ public class Event extends Room
         x.setyLoc(this.yLoc);
 
     }
+
+    /**
+     * takes the person out of the room
+     * @param x the player
+     */
     public void leaveRoom(Person x)
     {
         occupant = null;
     }
+
+    /**
+     * Generates an event for a room.
+     * @param x Player will be effected by the event
+     */
     private void getEvent(Person x)
     {
         String[] events = {"You found a map!","You accidentally stub your toe.","You find a treasure chest!","There's a potion on the ground.","You hit your head and now you have amnesia.", "You find a small pouch of gold on the ground"};

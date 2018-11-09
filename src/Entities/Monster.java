@@ -52,8 +52,8 @@ public class Monster implements Enemies
      */
     @Override
     public int dropGold() {
-        int gold = (int)(Math.random()*(hp+30+attack+resist)/3);
-        return gold;
+        int gold = (int)(Math.random()*(30+attack+resist)/3);
+        return gold +5 ;
     }
     
 

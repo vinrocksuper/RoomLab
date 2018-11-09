@@ -42,7 +42,9 @@ public class Runner {
 					System.out.println("Please choose a valid move.");
 
 				}
-
+				/**
+				 * Generates a new floor that is slightly bigger than the previous one (1 more wide and 1 more large to be exact.)
+				 */
 				if (move.equalsIgnoreCase("y") || move.equalsIgnoreCase("yes")) {
 					a++;
 					b++;
@@ -62,13 +64,17 @@ public class Runner {
 						player1.poisoned = false;
 						System.out.println("The effects of the poison wore off");
 					}
-					building[player1.getxLoc()][player1.getyLoc()].enterRoom(player1);
-					System.out.println(dungeon.toString(player1));
-					int strGain = (int) (Math.random() * building.length);
-					int dexGain = (int) (Math.random() * building.length);
+
+					int strGain = (int) (Math.random() * building.length +1);
+
+					int dexGain = (int) (Math.random() * building.length +1);
+
 					player1.dex += dexGain;
 					player1.str += strGain;
 					floor++;
+					building[player1.getxLoc()][player1.getyLoc()].enterRoom(player1);
+
+					System.out.println(dungeon.toString(player1));
 				}
 			}
 			if (!floorClear) {
@@ -154,6 +160,11 @@ public class Runner {
 		}
 		return true;
 	}
+
+	/**
+	 * Turns the game off.
+	 * Also prints out what floor the player died on.
+	 */
 	public static void gameOff()
 	{
 		gameOn = false;

@@ -7,7 +7,7 @@ public class Person {
 
 	int xLoc, yLoc;
 	public Boolean alive = true;
-	public int hp ;
+	public int hp = 100;
 	public boolean amnesia = false;
 	public boolean map = false;
 	public boolean poisoned = false;
@@ -53,7 +53,7 @@ public class Person {
 	{
 		this.xLoc = xLoc;
 		this.yLoc = yLoc;
-		this.hp = hp;
+
 
 	}
 
